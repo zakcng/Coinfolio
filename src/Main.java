@@ -1,3 +1,8 @@
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import lib.ExchangeData;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.ExchangeFactory;
@@ -8,10 +13,23 @@ import org.knowm.xchange.service.marketdata.MarketDataService;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Scanner;
 
-public class Main {
+public class Main extends Application{
+
+    @Override
+    public void start(Stage primaryStage) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        primaryStage.setTitle("Coinfolio");
+        primaryStage.setScene(new Scene(root, 600,400));
+        primaryStage.show();
+
+    }
 
     public static void main(String[] args) throws IOException {
+        launch(args);
+
+
         Exchange exchange = ExchangeFactory.INSTANCE.createExchange(CoinMarketCapExchange.class.getName());
         MarketDataService marketDataService = exchange.getMarketDataService();
 
@@ -38,9 +56,31 @@ public class Main {
         Ticker ticker1 = marketDataService.getTicker(currencyPairs.get(380));
         System.out.println(ticker1.toString());
 
+        for(CurrencyPair currencyPair : currencyPairs){
+            if (currencyPair.toString().contains("USD")) {
+                Ticker tickerb = marketDataService.getTicker(currencyPair);
+                System.out.println(tickerb.toString());
+            }
+        }
+
+        int cpIndex[] = new int[2];
+        Scanner sc = new Scanner(System.in);
+        for (int i = 0; i<2; i++){
+            System.out.println("Please enter index of your currency: ");
 
 
-       // System.out.println(currencyPairs.get(0).toString());
+            int indexNum = sc.nextInt();
+            cpIndex[i] = indexNum;
+        }
+        sc.close();
+
+        for (int cpIndexs : cpIndex) {
+            System.out.println("Item: " + cpIndexs);
+            ExchangeData.getIndexTickerString(cpIndexs);
+        }
+
+
+
 
     }
 
