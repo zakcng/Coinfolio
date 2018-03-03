@@ -21,11 +21,17 @@ public class Main {
 
         List<CurrencyPair> currencyPairs = lib.ExchangeData.getExchangeCurrencyPairs(org.knowm.xchange.coinmarketcap.CoinMarketCapExchange.class.getName());
 
+
         for(CurrencyPair currencyPair : currencyPairs){
             if (currencyPair.toString().contains("USD")) {
                 System.out.println(currencyPair);
             }
         }
+
+        Ticker ticker1 = marketDataService.getTicker(currencyPairs.get(0));
+        System.out.println(ticker1.toString());
+
+       // System.out.println(currencyPairs.get(0).toString());
 
     }
 
