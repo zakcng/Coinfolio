@@ -35,8 +35,8 @@
                   <ListView id="list" fx:id="list" prefHeight="335.0" prefWidth="8.0" />
                   <HBox>
                      <children>
-                        <TextField />
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="129.0" text="Add" />
+                        <TextField id="txt" />
+                        <Button id="btnAdd" mnemonicParsing="false" onAction="#btnAddButtonClicked" prefHeight="25.0" prefWidth="129.0" text="Add" />
                      </children>
                   </HBox>
                </children>
@@ -45,7 +45,7 @@
          <left>
             <VBox prefHeight="360.0" prefWidth="242.0" BorderPane.alignment="CENTER">
                <children>
-                  <ListView />
+                  <ListView id="sList" />
                </children>
             </VBox>
          </left>

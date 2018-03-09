@@ -4,9 +4,12 @@ import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TextField;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.ExchangeFactory;
 import org.knowm.xchange.coinmarketcap.CoinMarketCapExchange;
@@ -26,13 +29,15 @@ public class Controller implements Initializable {
 
     ListProperty<String> listProperty = new SimpleListProperty<>();
 
+
+
     @FXML
     private ListView list;
+    private ListView sList;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         Exchange exchange = ExchangeFactory.INSTANCE.createExchange(CoinMarketCapExchange.class.getName());
-        MarketDataService marketDataService = exchange.getMarketDataService();
 
         //Uses ExchangeData function to retrieve currencyPairs
         List<CurrencyPair> currencyPairs = lib.ExchangeData.getExchangeCurrencyPairs(org.knowm.xchange.coinmarketcap.CoinMarketCapExchange.class.getName());
@@ -45,13 +50,14 @@ public class Controller implements Initializable {
         //Uses : as delimiter
         for(CurrencyPair currencyPair : currencyPairs){
             if (currencyPair.toString().contains("USD")) {
-                System.out.println(index + (index++) + ":" + currencyPair.toString());
                 cpList.add(currencyPair.toString());
             }
         }
 
 
+
         list.itemsProperty().bind(listProperty);
+        //list.setItems(filteredList);
 
         //This does not work, you can not directly add to a ListProperty
         //listProperty.addAll( asianCurrencyList );
@@ -62,10 +68,13 @@ public class Controller implements Initializable {
         System.out.println("Saved!");
     }
 
-    /*
-    public static void cpListAdd(String item){
-        cpList.add(item);
-    } */
+    public void btnAddButtonClicked() {
+        ObservableList listOfItems = list.getSelectionModel().getSelectedItems();
+
+        System.out.println(listOfItems.toString());
+        sList.setItems(FXCollections.observableList(listOfItems));
+
+    }
 
 
 }
