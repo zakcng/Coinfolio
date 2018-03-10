@@ -36,8 +36,10 @@ public class ButtonPane extends HBox {
         }
 
         this.getChildren().add(lblValue);
+    }
 
-
+    public void setLblValue(String s) {
+        lblValue.setText(s);
     }
 
     public void addEditHandler(EventHandler<ActionEvent> handler) {

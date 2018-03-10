@@ -39,6 +39,10 @@ public class InputPane extends HBox {
         addBtn.setOnAction(handler);
     }
 
+    public String getTxtAmount() {
+        return txtAmount.getText();
+    }
+
     public boolean notEmpty() {
         if (txtAmount.getText().isEmpty()) {
             return false;

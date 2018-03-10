@@ -51,8 +51,10 @@ public class CoinfolioController {
             if (b1 == true) {
                 System.out.println("Not empty now doing something");
                 System.out.println(clvp.getSelectedItem());
-                ulvp.addCurrencyPair(clvp.getSelectedItem());
+                ulvp.addCurrencyPair(clvp.getSelectedItem().toString() + " $" +ip.getTxtAmount());
                 clvp.removeSelectedItem();
+
+bp.setLblValue();
 
             }
 
