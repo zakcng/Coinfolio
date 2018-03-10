@@ -10,6 +10,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.beans.value.ChangeListener;
 
 public class InputPane extends HBox {
     private ComboBox<String> cboType;
@@ -39,8 +40,9 @@ public class InputPane extends HBox {
         addBtn.setOnAction(handler);
     }
 
-    public String getTxtAmount() {
-        return txtAmount.getText();
+    public double getTxtAmount() {
+        double doubleValue = Double.parseDouble(txtAmount.getText());
+        return doubleValue;
     }
 
     public String getCboType() {
@@ -54,5 +56,6 @@ public class InputPane extends HBox {
         } else
             return true;
     }
+
 
 }

@@ -1,6 +1,9 @@
 package controller;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
@@ -48,9 +51,55 @@ public class CoinfolioController {
 
     private void attachEventHandlers() {
         ip.addAddHandler(new AddHandler());
+
+        clvp.addChangeListener( new ChangeListener() {
+            public void changed(ObservableValue observable,
+                                Object oldVal, Object newVal) {
+                handleSearchByKey((String)oldVal, (String)newVal);
+            }
+        });
     }
 
-    public class AddHandler implements EventHandler<ActionEvent> {
+    private void handleSearchByKey(String oldVal, String newVal) {
+        // If the number of characters in the text box is less than last time
+        // it must be because the user pressed delete
+        if ( oldVal != null && (newVal.length() < oldVal.length()) ) {
+            // Restore the lists original set of entries
+            // and start from the beginning
+          //  list.setItems( entries );
+        }
+
+        // Change to upper case so that case is not an issue
+        newVal = newVal.toUpperCase();
+
+        // Filter out the entries that don't contain the entered text
+        ObservableList<String> subentries = FXCollections.observableArrayList();
+        for ( Object entry: clvp.getCurrencyPairs()) {
+            String entryText = (String)entry.toString();
+            if ( entryText.toUpperCase().contains(newVal) ) {
+                subentries.add(entryText);
+                clvp.clearCurrencyPairs();
+
+                for (String s : subentries) {
+                    CurrencyPair cp = new CurrencyPair();
+                    cp.setCurrencyPair(s);
+                    clvp.addCurrencyPair(cp);
+                }
+
+            }
+        }
+
+        clvp.clearCurrencyPairs();
+
+        for (String s : subentries) {
+            CurrencyPair cp = new CurrencyPair();
+            cp.setCurrencyPair(s);
+            clvp.addCurrencyPair(cp);
+        }
+
+    }
+
+    private class AddHandler implements EventHandler<ActionEvent> {
         public void handle(ActionEvent event) {
 
             String stringValue = new String();
@@ -76,19 +125,24 @@ public class CoinfolioController {
                     }
                     String[] splitPrice = ticker0.toString().split(",");
                     stringValue = splitPrice[2].replaceAll("[^\\.0123456789]", "").substring(0, Math.min(splitPrice[2].length(), 7));
-                    ;
-                    ulvp.addCurrencyPair(clvp.getSelectedItem().toString() + " $" + stringValue);
+                    double stringValueDouble = (Double.parseDouble(stringValue) * ip.getTxtAmount());
+                    ulvp.addCurrencyPair(clvp.getSelectedItem().toString() + " $" + (stringValueDouble));
+                    portfolio.setValue(portfolio.getValue() + stringValueDouble);
+                    bp.setLblValue(portfolio.getValue());
 
                 } else if (ip.getCboType() == "USD") {
-
+                    ulvp.addCurrencyPair(clvp.getSelectedItem().toString() + "$" + ip.getTxtAmount());
+                    portfolio.setValue(portfolio.getValue() + ip.getTxtAmount());
+                    bp.setLblValue(portfolio.getValue());
                 }
 
                 clvp.removeSelectedItem();
 
+                /*
                 double doubleValue = Double.parseDouble(stringValue);
 
                 portfolio.setValue(portfolio.getValue() + doubleValue);
-                bp.setLblValue(portfolio.getValue());
+                bp.setLblValue(portfolio.getValue());*/
 
 
             }

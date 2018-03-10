@@ -1,5 +1,6 @@
 package view;
 
+import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
@@ -39,6 +40,11 @@ public class CurrencyListViewPane extends StackPane {
         return currencyPairs;
     }
 
+    /*
+    public void setObservableList(ObservableList ol) {
+        this.listView= ol;
+    }*/
+
     public CurrencyPair getSelectedItem() {
         return listView.getSelectionModel().getSelectedItem();
     }
@@ -56,4 +62,14 @@ public class CurrencyListViewPane extends StackPane {
             alert.showAndWait();
         }
     }
+
+
+    public void clearCurrencyPairs() {
+        currencyPairs.clear();
+    }
+
+    public void addChangeListener(ChangeListener<String> listener) {
+        txtSearch.textProperty().addListener(listener);
+    }
+
 }
