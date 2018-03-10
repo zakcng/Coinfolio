@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.CurrencyList;
+import model.Portfolio;
 import view.CoinfolioRootPane;
 
 public class ApplicationLoader extends Application {
@@ -15,7 +16,8 @@ public class ApplicationLoader extends Application {
     public void init() {
         CurrencyList model = new CurrencyList();
         view = new CoinfolioRootPane();
-        new CoinfolioController(view, model);
+        Portfolio portfolio = new Portfolio();
+        new CoinfolioController(view, model, portfolio);
     }
 
     @Override

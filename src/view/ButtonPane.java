@@ -31,15 +31,15 @@ public class ButtonPane extends HBox {
 
         this.getChildren().addAll(editBtn, removeBtn, refreshBtn);
         for (Node n : this.getChildren()) {
-            ((Button) n).setPrefSize(80, 30);
+            ((Button) n).setPrefSize(70, 30);
             ((Button) n).setPadding(new Insets(10, 10, 10, 0));
         }
 
         this.getChildren().add(lblValue);
     }
 
-    public void setLblValue(String s) {
-        lblValue.setText(s);
+    public void setLblValue(double i) {
+        lblValue.setText("Portfolio = $" + Math.floor(i * 100) / 100);
     }
 
     public void addEditHandler(EventHandler<ActionEvent> handler) {

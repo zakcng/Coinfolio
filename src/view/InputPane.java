@@ -43,6 +43,10 @@ public class InputPane extends HBox {
         return txtAmount.getText();
     }
 
+    public String getCboType() {
+        return cboType.getSelectionModel().getSelectedItem();
+    }
+
     public boolean notEmpty() {
         if (txtAmount.getText().isEmpty()) {
             return false;
