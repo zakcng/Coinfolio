@@ -3,33 +3,41 @@ package view;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
+import javafx.scene.control.Label;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 public class ButtonPane extends HBox {
     //Fields
-    private Button addBtn, editBtn, removeBtn, refreshBtn;
+    private Button editBtn, removeBtn, refreshBtn;
+    private Label lblValue;
 
     public ButtonPane() {
         this.setAlignment(Pos.CENTER);
         this.setSpacing(15);
+        this.setBorder(new Border(new BorderStroke(Color.web("#111111"), BorderStrokeStyle.SOLID, null, new BorderWidths(1.2))));
+        this.setPadding(new Insets(15,15,15,15));
 
-        addBtn = new Button("Add");
+
         editBtn = new Button("Edit");
         removeBtn = new Button("Remove");
         refreshBtn = new Button("Refresh");
+        lblValue = new Label("Portfolio = $0");
+        lblValue.setStyle("-fx-font-weight: bold;");
 
-        this.getChildren().addAll(addBtn, editBtn, removeBtn, refreshBtn);
-
+        this.getChildren().addAll(editBtn, removeBtn, refreshBtn);
         for (Node n : this.getChildren()) {
-            ((Button) n).setPrefSize(70, 30);
+            ((Button) n).setPrefSize(80, 30);
+            ((Button) n).setPadding(new Insets(10, 10, 10, 0));
         }
-    }
 
-    public void addAddHandler(EventHandler<ActionEvent> handler) {
-        addBtn.setOnAction(handler);
+        this.getChildren().add(lblValue);
+
+
     }
 
     public void addEditHandler(EventHandler<ActionEvent> handler) {

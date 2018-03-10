@@ -11,6 +11,7 @@ public class CoinfolioRootPane extends BorderPane{
 
     public CoinfolioRootPane() {
         this.setStyle("-fx-background-color: #415D78;");
+        //this.setPadding(new Insets(15,15,15,15));
 
         bp = new ButtonPane();
         ulvp = new UserListViewPane();
@@ -18,11 +19,11 @@ public class CoinfolioRootPane extends BorderPane{
        ip = new InputPane();
 
         BorderPane rootContainer = new BorderPane();
-        rootContainer.setLeft(ulvp);
+        rootContainer.setRight(ulvp);
         rootContainer.setCenter(clvp);
         rootContainer.setBottom(bp);
       rootContainer.setTop(ip);
-        rootContainer.setPadding(new Insets(20,20,20,20));
+        rootContainer.setPadding(new Insets(15,15,15,15));
 
         this.setCenter(rootContainer);
     }
@@ -37,6 +38,10 @@ public class CoinfolioRootPane extends BorderPane{
 
     public UserListViewPane getUserListViewPane() {
         return ulvp;
+    }
+
+    public InputPane getInputPane() {
+        return ip;
     }
 
 }

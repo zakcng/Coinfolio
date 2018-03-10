@@ -8,26 +8,27 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
-public class InputPane extends HBox{
+public class InputPane extends HBox {
     private ComboBox<String> cboType;
     private TextField txtAmount;
     private Button addBtn;
 
     public InputPane() {
-        this.setPadding(new Insets(20, 20, 20, 20));
+        this.setPadding(new Insets(30, 30, 30, 30));
         this.setStyle("-fx-background-color: #EBF6FF;");
 
 
-        ObservableList<String> types= FXCollections.observableArrayList("Coin","USD");
+        ObservableList<String> types = FXCollections.observableArrayList("Coin", "USD");
         cboType = new ComboBox<String>(types);
         cboType.getSelectionModel().select(0);
         cboType.setVisibleRowCount(2);
 
         txtAmount = new TextField();
         addBtn = new Button();
-        txtAmount.setPromptText("Enter amount");
+        txtAmount.setPromptText("Enter amount...");
         addBtn.setText("Add");
 
 
@@ -36,6 +37,14 @@ public class InputPane extends HBox{
 
     public void addAddHandler(EventHandler<ActionEvent> handler) {
         addBtn.setOnAction(handler);
+    }
+
+    public boolean notEmpty() {
+        if (txtAmount.getText().isEmpty()) {
+            return false;
+
+        } else
+            return true;
     }
 
 }

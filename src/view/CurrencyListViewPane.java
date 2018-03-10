@@ -2,8 +2,10 @@ package view;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import model.CurrencyList;
 import model.CurrencyPair;
@@ -11,6 +13,7 @@ import model.CurrencyPair;
 public class CurrencyListViewPane extends StackPane {
     private ListView<CurrencyPair> listView;
     private ObservableList<CurrencyPair> currencyPairs;
+    private TextField txtSearch;
 
     public CurrencyListViewPane() {
         currencyPairs = FXCollections.observableArrayList();
@@ -19,7 +22,11 @@ public class CurrencyListViewPane extends StackPane {
 
         listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
-        this.getChildren().add(listView);
+        txtSearch = new TextField();
+        txtSearch.setPromptText("Search...");
+        StackPane.setAlignment(txtSearch, Pos.BOTTOM_CENTER);
+
+        this.getChildren().addAll(listView,txtSearch);
 
     }
 
