@@ -2,24 +2,27 @@ package view;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.StackPane;
 import model.CurrencyPair;
 
 public class UserListViewPane extends StackPane {
-    private ListView<CurrencyPair> listView;
+    private ListView<CurrencyPair> listViewCurrencyPair;
+
     private ObservableList<CurrencyPair> currencyPairs;
 
     public UserListViewPane() {
         currencyPairs = FXCollections.observableArrayList();
-        listView = new ListView<>(currencyPairs);
-        listView.setPrefSize(200, 150);
 
-        listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        listViewCurrencyPair = new ListView<>(currencyPairs);
 
-        this.getChildren().add(listView);
+        listViewCurrencyPair.setPrefSize(200, 150);
 
+        listViewCurrencyPair.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+
+        this.getChildren().addAll(listViewCurrencyPair);
     }
 
     public void addCurrencyPair(CurrencyPair cp) {
@@ -31,6 +34,6 @@ public class UserListViewPane extends StackPane {
     }
 
     public CurrencyPair getSelectedItem() {
-        return listView.getSelectionModel().getSelectedItem();
+        return listViewCurrencyPair.getSelectionModel().getSelectedItem();
     }
 }

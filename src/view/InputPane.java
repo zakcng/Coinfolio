@@ -21,7 +21,7 @@ public class InputPane extends HBox {
         this.setStyle("-fx-background-color: #EBF6FF;");
 
 
-        ObservableList<String> types = FXCollections.observableArrayList("Coin", "USD");
+        ObservableList<String> types = FXCollections.observableArrayList("# Of Coins","USD");
         cboType = new ComboBox<String>(types);
         cboType.getSelectionModel().select(0);
         cboType.setVisibleRowCount(2);

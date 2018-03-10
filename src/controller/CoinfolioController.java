@@ -50,6 +50,9 @@ public class CoinfolioController {
             b1 = ip.notEmpty();
             if (b1 == true) {
                 System.out.println("Not empty now doing something");
+                System.out.println(clvp.getSelectedItem());
+                ulvp.addCurrencyPair(clvp.getSelectedItem());
+                clvp.removeSelectedItem();
 
             }
 

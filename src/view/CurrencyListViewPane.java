@@ -3,6 +3,7 @@ package view;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
@@ -40,5 +41,19 @@ public class CurrencyListViewPane extends StackPane {
 
     public CurrencyPair getSelectedItem() {
         return listView.getSelectionModel().getSelectedItem();
+    }
+
+    public void removeSelectedItem() {
+        int index = listView.getSelectionModel().getSelectedIndex();
+
+        if (index != -1) {
+            currencyPairs.remove(getSelectedItem());
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Selection Error");
+            alert.setContentText("Please select an item to remove.");
+            alert.showAndWait();
+        }
     }
 }
