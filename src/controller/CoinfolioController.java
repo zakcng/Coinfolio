@@ -63,29 +63,28 @@ public class CoinfolioController {
     private void handleSearchByKey(String oldVal, String newVal) {
         // If the number of characters in the text box is less than last time
         // it must be because the user pressed delete
+
+        List<String> subentries = FXCollections.observableArrayList();
         if ( oldVal != null && (newVal.length() < oldVal.length()) ) {
             // Restore the lists original set of entries
             // and start from the beginning
-          //  list.setItems( entries );
+
+            for (String s : subentries) {
+                CurrencyPair cp = new CurrencyPair();
+                cp.setCurrencyPair(s);
+                clvp.addCurrencyPair(cp);
+            }
         }
 
         // Change to upper case so that case is not an issue
         newVal = newVal.toUpperCase();
 
         // Filter out the entries that don't contain the entered text
-        ObservableList<String> subentries = FXCollections.observableArrayList();
+
         for ( Object entry: clvp.getCurrencyPairs()) {
             String entryText = (String)entry.toString();
             if ( entryText.toUpperCase().contains(newVal) ) {
                 subentries.add(entryText);
-                clvp.clearCurrencyPairs();
-
-                for (String s : subentries) {
-                    CurrencyPair cp = new CurrencyPair();
-                    cp.setCurrencyPair(s);
-                    clvp.addCurrencyPair(cp);
-                }
-
             }
         }
 
@@ -160,7 +159,8 @@ public class CoinfolioController {
 
         int index = 0;
         for (org.knowm.xchange.currency.CurrencyPair currencyPair : currencyPairs) {
-            if (currencyPair.toString().contains("USD")) {
+            String[] splitBase = currencyPair.toString().split("/");
+           if(splitBase[1].contains("USD")){
                 CurrencyPair cp = new CurrencyPair();
                 cp.setCurrencyPair(currencyPair.toString());
                 clvp.addCurrencyPair(cp);
