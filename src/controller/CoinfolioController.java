@@ -66,14 +66,10 @@ public class CoinfolioController {
 
         List<String> subentries = FXCollections.observableArrayList();
         if ( oldVal != null && (newVal.length() < oldVal.length()) ) {
+            System.out.println("DELETE");
             // Restore the lists original set of entries
             // and start from the beginning
-
-            for (String s : subentries) {
-                CurrencyPair cp = new CurrencyPair();
-                cp.setCurrencyPair(s);
-                clvp.addCurrencyPair(cp);
-            }
+            initialize();
         }
 
         // Change to upper case so that case is not an issue
