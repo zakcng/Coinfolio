@@ -24,7 +24,13 @@ public class ApplicationLoader extends Application {
     public void start(Stage stage) throws Exception {
         stage.setTitle("Coinfolio");
         stage.setScene(new Scene(view));
+        stage.setMinHeight(450);
+        stage.setMinWidth(450);
+        stage.setMaxWidth(450);
+        stage.setMaxHeight(450);
+        stage.resizableProperty().setValue(Boolean.FALSE);
         stage.show();
+
 
     }
 

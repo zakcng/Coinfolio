@@ -11,7 +11,7 @@ public class CoinfolioRootPane extends BorderPane{
 
     public CoinfolioRootPane() {
         this.setStyle("-fx-background-color: #415D78;");
-        //this.setPadding(new Insets(15,15,15,15));
+
 
         bp = new ButtonPane();
         ulvp = new UserListViewPane();
