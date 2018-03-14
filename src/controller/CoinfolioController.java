@@ -53,10 +53,10 @@ public class CoinfolioController {
         ip.addAddHandler(new AddHandler());
         bp.addRemoveHandler(new RemoveHandler());
 
-        clvp.addChangeListener( new ChangeListener() {
+        clvp.addChangeListener(new ChangeListener() {
             public void changed(ObservableValue observable,
                                 Object oldVal, Object newVal) {
-                handleSearchByKey((String)oldVal, (String)newVal);
+                handleSearchByKey((String) oldVal, (String) newVal);
             }
         });
     }
@@ -66,7 +66,7 @@ public class CoinfolioController {
         // it must be because the user pressed delete
 
         List<String> subentries = FXCollections.observableArrayList();
-        if ( oldVal != null && (newVal.length() < oldVal.length()) ) {
+        if (oldVal != null && (newVal.length() < oldVal.length())) {
             System.out.println("DELETE");
             // Restore the lists original set of entries
             // and start from the beginning
@@ -78,9 +78,9 @@ public class CoinfolioController {
 
         // Filter out the entries that don't contain the entered text
 
-        for ( Object entry: clvp.getCurrencyPairs()) {
-            String entryText = (String)entry.toString();
-            if ( entryText.toUpperCase().contains(newVal) ) {
+        for (Object entry : clvp.getCurrencyPairs()) {
+            String entryText = (String) entry.toString();
+            if (entryText.toUpperCase().contains(newVal)) {
                 subentries.add(entryText);
             }
         }
@@ -145,15 +145,14 @@ public class CoinfolioController {
         public void handle(ActionEvent event) {
 
             double stringValueDouble = (Double.parseDouble(ulvp.getSelectedItem().toString().replaceAll(".*\\$", "")));
-            portfolio.setValue(portfolio.getValue()-stringValueDouble);
+            portfolio.setValue(portfolio.getValue() - stringValueDouble);
             bp.setLblValue(portfolio.getValue());
             ulvp.removeSelectedItem();
         }
     }
 
 
-
-            public void initialize() {
+    public void initialize() {
         Exchange exchange = ExchangeFactory.INSTANCE.createExchange(CoinMarketCapExchange.class.getName());
 
         List<org.knowm.xchange.currency.CurrencyPair> currencyPairs = lib.ExchangeData.getExchangeCurrencyPairs(org.knowm.xchange.coinmarketcap.CoinMarketCapExchange.class.getName());
@@ -161,7 +160,7 @@ public class CoinfolioController {
         int index = 0;
         for (org.knowm.xchange.currency.CurrencyPair currencyPair : currencyPairs) {
             String[] splitBase = currencyPair.toString().split("/");
-           if(splitBase[1].contains("USD")){
+            if (splitBase[1].contains("USD")) {
                 CurrencyPair cp = new CurrencyPair();
                 cp.setCurrencyPair(currencyPair.toString());
                 clvp.addCurrencyPair(cp);

@@ -13,7 +13,7 @@ import javafx.scene.paint.Color;
 
 public class ButtonPane extends HBox {
     //Fields
-    private Button editBtn, removeBtn, refreshBtn;
+    private Button /*edit*/ removeBtn, refreshBtn;
     private Label lblValue;
 
     public ButtonPane() {
@@ -23,13 +23,13 @@ public class ButtonPane extends HBox {
         this.setPadding(new Insets(15,15,15,15));
 
 
-        editBtn = new Button("Edit");
+        //editBtn = new Button("Edit");
         removeBtn = new Button("Remove");
         refreshBtn = new Button("Refresh");
         lblValue = new Label("Portfolio = $0");
         lblValue.setStyle("-fx-font-weight: bold;");
 
-        this.getChildren().addAll(editBtn, removeBtn, refreshBtn);
+        this.getChildren().addAll(/*editBtn*/ removeBtn, refreshBtn);
         for (Node n : this.getChildren()) {
             ((Button) n).setPrefSize(70, 30);
             ((Button) n).setPadding(new Insets(10, 10, 10, 0));
@@ -42,9 +42,10 @@ public class ButtonPane extends HBox {
         lblValue.setText("Portfolio = $" + Math.floor(i * 100) / 100);
     }
 
+    /*
     public void addEditHandler(EventHandler<ActionEvent> handler) {
         editBtn.setOnAction(handler);
-    }
+    }*/
 
     public void addRemoveHandler(EventHandler<ActionEvent> handler) {
         removeBtn.setOnAction(handler);
