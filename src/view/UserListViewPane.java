@@ -2,15 +2,16 @@ package view;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
+import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import model.CurrencyPair;
 
-public class UserListViewPane extends StackPane {
+public class UserListViewPane extends VBox {
     private ListView<String> listViewCurrencyPair;
+    private TextField txtValue;
 
     private ObservableList<String> currencyPairStrings;
 
@@ -19,11 +20,19 @@ public class UserListViewPane extends StackPane {
 
         listViewCurrencyPair = new ListView<>(currencyPairStrings);
 
-        listViewCurrencyPair.setPrefSize(200, 150);
+       listViewCurrencyPair.setPrefWidth(200);
 
         listViewCurrencyPair.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
-        this.getChildren().addAll(listViewCurrencyPair);
+        txtValue = new TextField("Portfolio = $0");
+        txtValue.setStyle("-fx-font-weight: bold;");
+        txtValue.setEditable(false);
+
+        StackPane.setAlignment(txtValue, Pos.BOTTOM_CENTER);
+
+
+        this.getChildren().addAll(listViewCurrencyPair, txtValue);
+
     }
 
     public void addCurrencyPair(String cp) {
@@ -33,6 +42,11 @@ public class UserListViewPane extends StackPane {
     public String getSelectedItem() {
         return listViewCurrencyPair.getSelectionModel().getSelectedItem();
     }
+
+    public void setLblValue(double i) {
+        txtValue.setText("Portfolio = $" + Math.floor(i * 100) / 100);
+    }
+
     public void removeSelectedItem() {
         int index = listViewCurrencyPair.getSelectionModel().getSelectedIndex();
 

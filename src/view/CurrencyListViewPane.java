@@ -9,10 +9,11 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import model.CurrencyList;
 import model.CurrencyPair;
 
-public class CurrencyListViewPane extends StackPane {
+public class CurrencyListViewPane extends VBox {
     private ListView<CurrencyPair> listView;
     private ObservableList<CurrencyPair> currencyPairs;
     private TextField txtSearch;
@@ -20,7 +21,7 @@ public class CurrencyListViewPane extends StackPane {
     public CurrencyListViewPane() {
         currencyPairs = FXCollections.observableArrayList();
         listView = new ListView<>(currencyPairs);
-        listView.setPrefSize(200, 150);
+        listView.setPrefWidth(200);
 
         listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
@@ -48,6 +49,7 @@ public class CurrencyListViewPane extends StackPane {
     public CurrencyPair getSelectedItem() {
         return listView.getSelectionModel().getSelectedItem();
     }
+
 
     public void removeSelectedItem() {
         int index = listView.getSelectionModel().getSelectedIndex();

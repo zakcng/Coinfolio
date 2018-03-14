@@ -124,12 +124,12 @@ public class CoinfolioController {
                     double stringValueDouble = (Double.parseDouble(stringValue) * ip.getTxtAmount());
                     ulvp.addCurrencyPair(clvp.getSelectedItem().toString() + " $" + (stringValueDouble));
                     portfolio.setValue(portfolio.getValue() + stringValueDouble);
-                    bp.setLblValue(portfolio.getValue());
+                    ulvp.setLblValue(portfolio.getValue());
 
                 } else if (ip.getCboType() == "USD") {
                     ulvp.addCurrencyPair(clvp.getSelectedItem().toString() + "$" + ip.getTxtAmount());
                     portfolio.setValue(portfolio.getValue() + ip.getTxtAmount());
-                    bp.setLblValue(portfolio.getValue());
+                    ulvp.setLblValue(portfolio.getValue());
                 }
 
                 clvp.removeSelectedItem();
@@ -146,7 +146,7 @@ public class CoinfolioController {
 
             double stringValueDouble = (Double.parseDouble(ulvp.getSelectedItem().toString().replaceAll(".*\\$", "")));
             portfolio.setValue(portfolio.getValue() - stringValueDouble);
-            bp.setLblValue(portfolio.getValue());
+            ulvp.setLblValue(portfolio.getValue());
             ulvp.removeSelectedItem();
         }
     }
@@ -157,7 +157,7 @@ public class CoinfolioController {
 
         List<org.knowm.xchange.currency.CurrencyPair> currencyPairs = lib.ExchangeData.getExchangeCurrencyPairs(org.knowm.xchange.coinmarketcap.CoinMarketCapExchange.class.getName());
 
-        int index = 0;
+
         for (org.knowm.xchange.currency.CurrencyPair currencyPair : currencyPairs) {
             String[] splitBase = currencyPair.toString().split("/");
             if (splitBase[1].contains("USD")) {
