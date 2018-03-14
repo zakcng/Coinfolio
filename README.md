@@ -1,4 +1,4 @@
-# Coinfolio
+# Coinfolio (Not Complete)
 
 A simple java program that builds on the X-Change library accessing the CoinMarketCap (CMC) API. 
 
