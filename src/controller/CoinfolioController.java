@@ -51,6 +51,7 @@ public class CoinfolioController {
 
     private void attachEventHandlers() {
         ip.addAddHandler(new AddHandler());
+        bp.addRemoveHandler(new RemoveHandler());
 
         clvp.addChangeListener( new ChangeListener() {
             public void changed(ObservableValue observable,
@@ -133,13 +134,6 @@ public class CoinfolioController {
 
                 clvp.removeSelectedItem();
 
-                /*
-                double doubleValue = Double.parseDouble(stringValue);
-
-                portfolio.setValue(portfolio.getValue() + doubleValue);
-                bp.setLblValue(portfolio.getValue());*/
-
-
             }
 
 
@@ -147,8 +141,19 @@ public class CoinfolioController {
 
     }
 
+    private class RemoveHandler implements EventHandler<ActionEvent> {
+        public void handle(ActionEvent event) {
 
-    public void initialize() {
+            double stringValueDouble = (Double.parseDouble(ulvp.getSelectedItem().toString().replaceAll(".*\\$", "")));
+            portfolio.setValue(portfolio.getValue()-stringValueDouble);
+            bp.setLblValue(portfolio.getValue());
+            ulvp.removeSelectedItem();
+        }
+    }
+
+
+
+            public void initialize() {
         Exchange exchange = ExchangeFactory.INSTANCE.createExchange(CoinMarketCapExchange.class.getName());
 
         List<org.knowm.xchange.currency.CurrencyPair> currencyPairs = lib.ExchangeData.getExchangeCurrencyPairs(org.knowm.xchange.coinmarketcap.CoinMarketCapExchange.class.getName());

@@ -17,7 +17,7 @@ public class ButtonPane extends HBox {
     private Label lblValue;
 
     public ButtonPane() {
-        this.setAlignment(Pos.CENTER);
+        this.setAlignment(Pos.CENTER_LEFT);
         this.setSpacing(15);
         this.setBorder(new Border(new BorderStroke(Color.web("#111111"), BorderStrokeStyle.SOLID, null, new BorderWidths(1.2))));
         this.setPadding(new Insets(15,15,15,15));

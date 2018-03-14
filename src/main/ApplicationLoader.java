@@ -21,7 +21,7 @@ public class ApplicationLoader extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
         stage.setTitle("Coinfolio");
         stage.setScene(new Scene(view));
         stage.setMinHeight(450);

@@ -3,6 +3,7 @@ package view;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -39,6 +40,7 @@ public class InputPane extends HBox {
     public void addAddHandler(EventHandler<ActionEvent> handler) {
         addBtn.setOnAction(handler);
     }
+
 
     public double getTxtAmount() {
         double doubleValue = Double.parseDouble(txtAmount.getText());
